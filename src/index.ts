@@ -1,11 +1,11 @@
 import "reflect-metadata";
 import dotenv from "dotenv";
-import { server } from "./server";
+import { Servidor } from "./Infrastrutura/Servidor/Servidor";
 
 dotenv.config({
-  path: "./src/configurations/.env",
+  path: "./src/API/Configuracoes/.env",
 });
 
-server.listen(process.env.SERVER_PORT, () => {
+Servidor.listen(process.env.SERVER_PORT, () => {
   console.log(`API running at port ${process.env.SERVER_PORT}`);
 });
