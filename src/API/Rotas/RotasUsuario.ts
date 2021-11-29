@@ -6,19 +6,9 @@ import { ControladorUsuario } from "../Controladores/ControladorUsuario";
 const RotasUsuario = Router();
 const controladorUsuario = container.resolve(ControladorUsuario);
 
-/**
- * @swagger
- *  /api/usuario:
- *   get:
- *    description: Use to request all customers
- *    responses:
- *     '200':
- *      description: A successfull response
- *    
- */
-RotasUsuario.get("/", controladorUsuario.ObterTodosUsuarios);
+RotasUsuario.get("/usuario", controladorUsuario.ObterTodosUsuarios);
 
-RotasUsuario.post("/",
+RotasUsuario.post("/usuario",
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(
@@ -33,7 +23,7 @@ RotasUsuario.post("/",
   ), controladorUsuario.AdicionarUsuario
 );
 
-RotasUsuario.delete("/:id",
+RotasUsuario.delete("/usuario/:id",
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
@@ -45,7 +35,7 @@ RotasUsuario.delete("/:id",
   ), controladorUsuario.RemoverUsuario
 );
 
-RotasUsuario.patch("/senha/:id",
+RotasUsuario.patch("/usuario/senha/:id",
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(

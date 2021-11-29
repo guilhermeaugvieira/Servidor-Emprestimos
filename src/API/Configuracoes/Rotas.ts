@@ -4,7 +4,7 @@ import { RotaSwagger } from "./Swagger";
 
 const Rotas = Router();
 
-Rotas.use("/api/usuario", RotasUsuario);
+Rotas.use("/api", RotasUsuario);
 Rotas.use("/api/swagger", RotaSwagger);
 
 Rotas.get("/api", (req: Request, res: Response) => {
