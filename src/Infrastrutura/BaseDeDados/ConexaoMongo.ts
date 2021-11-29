@@ -1,9 +1,12 @@
 import { Connection, connect, connection, disconnect} from "mongoose";
+import { Lifecycle, scoped } from "tsyringe";
+import { IConexaoMongo } from "../Interfaces/IConexaoMongo";
 
-class ConexaoMongo{
+@scoped(Lifecycle.ContainerScoped)
+class ConexaoMongo implements IConexaoMongo{
   baseDeDados: Connection = null;
 
-  async conectar() : Promise<void> {
+  async Conectar() : Promise<void> {
     if (this.baseDeDados) return;
 
     try {
@@ -15,7 +18,7 @@ class ConexaoMongo{
     }    
   }
 
-  async disconectar(): Promise<void> {
+  async Disconectar(): Promise<void> {
     if (!this.baseDeDados) return;
 
     try {

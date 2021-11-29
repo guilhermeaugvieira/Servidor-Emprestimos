@@ -1,11 +1,16 @@
 import { celebrate, errors, Joi, Segments } from "celebrate";
 import { Router } from "express";
+import { container } from "tsyringe";
 import { ControladorUsuario } from "../Controladores/ControladorUsuario";
 
 const RotasUsuario = Router();
-const controladorUsuario = new ControladorUsuario();
+const controladorUsuario = container.resolve(ControladorUsuario);
 
+/**
+ * @swagger
+ */
 RotasUsuario.get("/", controladorUsuario.ObterTodosUsuarios);
+
 RotasUsuario.post("/",
   celebrate(
     {
@@ -20,10 +25,11 @@ RotasUsuario.post("/",
     }
   ), controladorUsuario.AdicionarUsuario
 );
-RotasUsuario.delete("/",
+
+RotasUsuario.delete("/:id",
   celebrate(
     {
-      [Segments.BODY]: Joi.object().keys(
+      [Segments.PARAMS]: Joi.object().keys(
         {
           id: Joi.string().required().trim(),
         }

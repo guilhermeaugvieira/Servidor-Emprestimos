@@ -1,24 +1,26 @@
 import { Request, Response } from 'express';
 import { ConexaoMongo } from '../../Infrastrutura/BaseDeDados/ConexaoMongo';
-import { RepositorioUsuario } from '../../Dados/Repositorios/RepositorioUsuario';
-import { ServicoUsuario } from '../../Aplicacao/Servicos/Implementacoes/ServicoUsuario';
+import { inject, injectable } from 'tsyringe';
+import { IServicoUsuario } from '../../Aplicacao/Servicos/Interfaces/IServicoUsuario';
+import { IConexaoMongo } from '../../Infrastrutura/Interfaces/IConexaoMongo';
 
+@injectable()
 class ControladorUsuario {
   conexao : ConexaoMongo = null;
-  servicoUsuario : ServicoUsuario;
   
-  constructor() {
-    this.conexao = new ConexaoMongo();
-    this.servicoUsuario = new ServicoUsuario();
+  constructor(
+    @inject("ServicoUsuario") private _servicoUsuario: IServicoUsuario,
+    @inject("ConexaoMongo") private _conexao: IConexaoMongo
+  ) {
   }
 
   ObterTodosUsuarios = async (req: Request, res: Response) : Promise<Response> => {  
     try {
-      await this.conexao.conectar();
+      await this._conexao.Conectar();
 
-      const response = await this.servicoUsuario.ObterTodosUsuarios();
+      const response = await this._servicoUsuario.ObterTodosUsuarios();
 
-      await this.conexao.disconectar();
+      await this._conexao.Disconectar();
 
       return res.json(response);
     
@@ -31,11 +33,11 @@ class ControladorUsuario {
     const { email, nome, cpf, senha} = req.body;
     
     try {
-      await this.conexao.conectar();
+      await this._conexao.Conectar();
 
-      const response = await this.servicoUsuario.AdicionarUsuario(email, nome, cpf, senha);
+      const response = await this._servicoUsuario.AdicionarUsuario(email, nome, cpf, senha);
 
-      await this.conexao.disconectar();
+      await this._conexao.Disconectar();
 
       return res.json(response);
     } catch(error) {
@@ -44,12 +46,14 @@ class ControladorUsuario {
   }
 
   RemoverUsuario = async (req: Request, res: Response) : Promise<Response> => {
+    const { id } = req.params;
+    
     try {
-      await this.conexao.conectar();
+      await this._conexao.Conectar();
 
-      const response = "Ok";
+      const response = await this._servicoUsuario.RemoverUsuario(id);
 
-      await this.conexao.disconectar();
+      await this._conexao.Disconectar();
 
       return res.json(response);
     } catch (error ) {
