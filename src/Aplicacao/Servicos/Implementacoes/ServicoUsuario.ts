@@ -37,11 +37,19 @@ class ServicoUsuario implements IServicoUsuario{
     try {
       const contadorEmail = (await RepositorioUsuario.find({ Email: email})).length;
       
-      if (contadorEmail > 0 ) this._notificador.AdicionarNotificacao("Email já cadastrado");
+      if (contadorEmail > 0 ) {
+        this._notificador.AdicionarNotificacao("Email já cadastrado");
+
+        return null;
+      }
 
       const contadorCpf = await (await RepositorioUsuario.find({ Cpf: cpf})).length;
 
-      if (contadorCpf > 0) this._notificador.AdicionarNotificacao("Cpf já cadastrado");
+      if (contadorCpf > 0) {
+        this._notificador.AdicionarNotificacao("Cpf já cadastrado");
+
+        return null;
+      }
       
       const novoUsuario = await RepositorioUsuario.create(usuarioAdicionado);
 
@@ -58,7 +66,11 @@ class ServicoUsuario implements IServicoUsuario{
     try {
       const contadorEmprestimos = (await RepositorioEmprestimo.find({ Id_Usuario: idUsuario}).exec()).length;
       
-      if (contadorEmprestimos > 0) this._notificador.AdicionarNotificacao("Usuário possui empréstimos cadastrados");
+      if (contadorEmprestimos > 0) {
+        this._notificador.AdicionarNotificacao("Usuário possui empréstimos cadastrados");
+      
+        return null;
+      }
 
       const usuarioRemovido = await RepositorioUsuario.deleteOne({_id: idUsuario}).exec();
 

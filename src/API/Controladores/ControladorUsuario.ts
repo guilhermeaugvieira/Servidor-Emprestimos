@@ -3,6 +3,7 @@ import { ConexaoMongo } from '../../Infrastrutura/BaseDeDados/ConexaoMongo';
 import { inject, injectable } from 'tsyringe';
 import { IServicoUsuario } from '../../Aplicacao/Servicos/Interfaces/IServicoUsuario';
 import { IConexaoMongo } from '../../Infrastrutura/Interfaces/IConexaoMongo';
+import { INotificador } from '../../Negocio/Interfaces/INotificador';
 
 @injectable()
 class ControladorUsuario {
@@ -10,7 +11,8 @@ class ControladorUsuario {
   
   constructor(
     @inject("ServicoUsuario") private _servicoUsuario: IServicoUsuario,
-    @inject("ConexaoMongo") private _conexao: IConexaoMongo
+    @inject("ConexaoMongo") private _conexao: IConexaoMongo,
+    @inject("Notificador") private _notificador: INotificador
   ) {
   }
 
@@ -56,24 +58,22 @@ class ControladorUsuario {
       await this._conexao.Disconectar();
 
       return res.json(response);
-    } catch (error ) {
+    } catch (error) {
       return res.json(error);
     }
   }
 
-  // StatusUsuario = async (req: Request, res: Response) : Promise<Response> => {
-  //   try {
-  //     await this.conexao.conectar();
+  AtualizarSenha = async (req: Request, res: Response) : Promise<Response> => {
+    try {
+      await this._conexao.Conectar();
 
-  //     const response;
 
-  //     await this.conexao.disconectar();
 
-  //     return res.json(response);
-  //   } catch (error ) {
-  //     return res.json(error);
-  //   }
-  // }
+      await this._conexao.Disconectar();
+    } catch (error) {
+      return res.json(error);
+    }
+  }
 }
 
 export { ControladorUsuario };

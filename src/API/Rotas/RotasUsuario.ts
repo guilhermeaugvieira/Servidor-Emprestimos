@@ -8,6 +8,13 @@ const controladorUsuario = container.resolve(ControladorUsuario);
 
 /**
  * @swagger
+ *  /api/usuario:
+ *   get:
+ *    description: Use to request all customers
+ *    responses:
+ *     '200':
+ *      description: A successfull response
+ *    
  */
 RotasUsuario.get("/", controladorUsuario.ObterTodosUsuarios);
 
@@ -37,6 +44,18 @@ RotasUsuario.delete("/:id",
     }
   ), controladorUsuario.RemoverUsuario
 );
+
+RotasUsuario.patch("/senha/:id",
+  celebrate(
+    {
+      [Segments.BODY]: Joi.object().keys(
+        {
+          senha: Joi.string().required().trim(),
+        }
+      ),
+    }
+  ), controladorUsuario.AtualizarSenha
+)
 
 RotasUsuario.use(errors());
 

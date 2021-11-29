@@ -8,6 +8,9 @@ class Notificador implements INotificador{
   constructor() {
     this.Mensagens = [];
   }
+  TemNotificacao(): Boolean {
+    return this.Mensagens.length > 0;
+  }
   
   AdicionarNotificacao(mensagem: String): void {
     this.Mensagens.push(mensagem);  
