@@ -2,7 +2,6 @@ import { Connection, connect, connection, disconnect} from "mongoose";
 import { Lifecycle, scoped } from "tsyringe";
 import { IConexaoMongo } from "../Interfaces/IConexaoMongo";
 
-@scoped(Lifecycle.ContainerScoped)
 class ConexaoMongo implements IConexaoMongo{
   baseDeDados: Connection = null;
 

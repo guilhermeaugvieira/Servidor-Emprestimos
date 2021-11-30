@@ -1,10 +1,9 @@
 import { celebrate, errors, Joi, Segments } from "celebrate";
 import { Router } from "express";
-import { container } from "tsyringe";
 import { ControladorUsuario } from "../Controladores/ControladorUsuario";
 
 const RotasUsuario = Router();
-const controladorUsuario = container.resolve(ControladorUsuario);
+const controladorUsuario = new ControladorUsuario();
 
 RotasUsuario.get("/usuario", controladorUsuario.ObterTodosUsuarios);
 
@@ -23,6 +22,19 @@ RotasUsuario.post("/usuario",
   ), controladorUsuario.AdicionarUsuario
 );
 
+RotasUsuario.post("/usuario/login",
+  celebrate(
+    {
+      [Segments.BODY]: Joi.object().keys(
+        {
+          cpf: Joi.string().required().trim(),
+          senha: Joi.string().required().trim(),
+        }
+      ),
+    }
+  ), controladorUsuario.Login
+);
+
 RotasUsuario.delete("/usuario/:id",
   celebrate(
     {
@@ -35,7 +47,7 @@ RotasUsuario.delete("/usuario/:id",
   ), controladorUsuario.RemoverUsuario
 );
 
-RotasUsuario.patch("/usuario/senha/:id",
+RotasUsuario.patch("/usuario/:id/senha",
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(
@@ -43,8 +55,25 @@ RotasUsuario.patch("/usuario/senha/:id",
           senha: Joi.string().required().trim(),
         }
       ),
+      [Segments.PARAMS]: Joi.object().keys(
+        {
+          id: Joi.string().required().trim(),
+        }
+      ),
     }
   ), controladorUsuario.AtualizarSenha
+)
+
+RotasUsuario.patch("/usuario/:id/habilitar",
+  celebrate(
+    {
+      [Segments.PARAMS]: Joi.object().keys(
+        {
+          id: Joi.string().required().trim(),
+        }
+      ),
+    }
+  ), controladorUsuario.HabilitarUsuario
 )
 
 RotasUsuario.use(errors());

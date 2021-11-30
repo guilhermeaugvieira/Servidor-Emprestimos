@@ -5,7 +5,7 @@ const Usuario = new Schema({
   Nome: {type: String, required: true},
   Cpf: {type: String, required: true, unique: true},
   Senha: {type: String, required: true},
-  Habilitado: {type: String, required: true},
+  Habilitado: {type: Boolean, required: true},
 }, {
   collection: 'usuarios',
   versionKey: false,
