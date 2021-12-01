@@ -14,11 +14,11 @@ const doc = {
   produces: ['application/json'],
   tags: [
     {
-      name: "Usuários",
+      name: "Usuarios",
       description: "Gerencia os usuários"
     },
     {
-      name: "Empréstimos",
+      name: "Emprestimos",
       description: "Gerencia os empréstimos"
     },
     {

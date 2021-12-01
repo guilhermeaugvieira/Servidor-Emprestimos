@@ -6,14 +6,14 @@ const RotasUsuario = Router();
 const controladorUsuario = new ControladorUsuario();
 
 RotasUsuario.get("/usuarios", 
-  // #swagger.tags = ['Usuários']
+  // #swagger.tags = ['Usuarios']
   // #swagger.summary = 'Obtém todos os usuários'
   // #swagger.description = 'Retorna todos os usuários cadastrados na aplicação'
 
   controladorUsuario.ObterTodosUsuarios);
 
 RotasUsuario.get("/usuarios/:idUsuario",
-  // #swagger.tags = ['Usuários']
+  // #swagger.tags = ['Usuarios']
   // #swagger.summary = 'Obtém usuario por id'
   // #swagger.description = 'Realiza a busca do usuário pelo id'
 
@@ -29,7 +29,7 @@ RotasUsuario.get("/usuarios/:idUsuario",
 );
 
 RotasUsuario.post("/usuarios",
-  // #swagger.tags = ['Usuários']
+  // #swagger.tags = ['Usuarios']
   // #swagger.summary = 'Adiciona um novo usuário'
   // #swagger.description = 'Solicito o registro de um novo usuário na aplicação'
 
@@ -48,7 +48,7 @@ RotasUsuario.post("/usuarios",
 );
 
 RotasUsuario.post("/usuarios/login",
-  // #swagger.tags = ['Usuários']
+  // #swagger.tags = ['Usuarios']
   // #swagger.summary = 'Realiza o login na aplicação'
   // #swagger.description = 'Realiza o login na aplicação se o usuário for habilitado'
 

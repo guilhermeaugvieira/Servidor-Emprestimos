@@ -6,14 +6,14 @@ const RotasEmprestimo = Router();
 const controladorEmprestimo = new ControladorEmprestimo();
 
 RotasEmprestimo.get("/emprestimos", 
-  // #swagger.tags = ['Empréstimos']
+  // #swagger.tags = ['Emprestimos']
   // #swagger.summary = 'Obtém todos os empréstimos'
   // #swagger.description = 'Retorna todos os empréstimos cadastrados na aplicação'
 
   controladorEmprestimo.ObterTodosEmprestimos);
 
 RotasEmprestimo.get("/emprestimos/:idEmprestimo",
-  // #swagger.tags = ['Empréstimos']
+  // #swagger.tags = ['Emprestimos']
   // #swagger.summary = 'Obtém empréstimo por id'
   // #swagger.description = 'Realiza a busca do empréstimo pelo id e retorna os dados do empréstimo'
 
@@ -29,7 +29,7 @@ RotasEmprestimo.get("/emprestimos/:idEmprestimo",
 );
 
 RotasEmprestimo.get("/emprestimos/usuario/:idUsuario",
-  // #swagger.tags = ['Empréstimos']
+  // #swagger.tags = ['Emprestimos']
   // #swagger.summary = 'Obtém todos os empréstimo de um usuário'
   // #swagger.description = 'Retorna os dados de todos os empréstimos realizado pelo usuário'
 
@@ -45,7 +45,7 @@ RotasEmprestimo.get("/emprestimos/usuario/:idUsuario",
 );
 
 RotasEmprestimo.post("/emprestimos",
-  // #swagger.tags = ['Empréstimos']
+  // #swagger.tags = ['Emprestimos']
   // #swagger.summary = 'Solicita um novo empréstimo'
   // #swagger.description = 'Registra uma solicitação de empréstimo'
 
@@ -63,7 +63,7 @@ RotasEmprestimo.post("/emprestimos",
 );
 
 RotasEmprestimo.patch("/emprestimos/:idEmprestimo/status",
-  // #swagger.tags = ['Empréstimos']
+  // #swagger.tags = ['Emprestimos']
   // #swagger.summary = 'Atualiza o status de aprovação do empréstimo'
   // #swagger.description = 'Atualiza o status de empréstimos em fase de análise'
 

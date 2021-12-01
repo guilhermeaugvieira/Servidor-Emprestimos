@@ -9,11 +9,11 @@
   "basePath": "/api",
   "tags": [
     {
-      "name": "Usuários",
+      "name": "Usuarios",
       "description": "Gerencia os usuários"
     },
     {
-      "name": "Empréstimos",
+      "name": "Emprestimos",
       "description": "Gerencia os empréstimos"
     },
     {
@@ -43,7 +43,7 @@
     "/emprestimos": {
       "get": {
         "tags": [
-          "Empréstimos"
+          "Emprestimos"
         ],
         "summary": "Obtém todos os empréstimos",
         "description": "Retorna todos os empréstimos cadastrados na aplicação",
@@ -52,7 +52,7 @@
       },
       "post": {
         "tags": [
-          "Empréstimos"
+          "Emprestimos"
         ],
         "summary": "Solicita um novo empréstimo",
         "description": "Registra uma solicitação de empréstimo",
@@ -63,7 +63,7 @@
     "/emprestimos/{idEmprestimo}": {
       "get": {
         "tags": [
-          "Empréstimos"
+          "Emprestimos"
         ],
         "summary": "Obtém empréstimo por id",
         "description": "Realiza a busca do empréstimo pelo id e retorna os dados do empréstimo",
@@ -81,7 +81,7 @@
     "/emprestimos/usuario/{idUsuario}": {
       "get": {
         "tags": [
-          "Empréstimos"
+          "Emprestimos"
         ],
         "summary": "Obtém todos os empréstimo de um usuário",
         "description": "Retorna os dados de todos os empréstimos realizado pelo usuário",
@@ -99,7 +99,7 @@
     "/emprestimos/{idEmprestimo}/status": {
       "patch": {
         "tags": [
-          "Empréstimos"
+          "Emprestimos"
         ],
         "summary": "Atualiza o status de aprovação do empréstimo",
         "description": "Atualiza o status de empréstimos em fase de análise",
@@ -182,7 +182,7 @@
     "/usuarios": {
       "get": {
         "tags": [
-          "Usuários"
+          "Usuarios"
         ],
         "summary": "Obtém todos os usuários",
         "description": "Retorna todos os usuários cadastrados na aplicação",
@@ -191,7 +191,7 @@
       },
       "post": {
         "tags": [
-          "Usuários"
+          "Usuarios"
         ],
         "summary": "Adiciona um novo usuário",
         "description": "Solicito o registro de um novo usuário na aplicação",
@@ -202,7 +202,7 @@
     "/usuarios/{idUsuario}": {
       "get": {
         "tags": [
-          "Usuários"
+          "Usuarios"
         ],
         "summary": "Obtém usuario por id",
         "description": "Realiza a busca do usuário pelo id",
@@ -236,7 +236,7 @@
     "/usuarios/login": {
       "post": {
         "tags": [
-          "Usuários"
+          "Usuarios"
         ],
         "summary": "Realiza o login na aplicação",
         "description": "Realiza o login na aplicação se o usuário for habilitado",
