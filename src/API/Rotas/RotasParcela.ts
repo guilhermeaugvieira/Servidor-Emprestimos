@@ -5,29 +5,7 @@ import { ControladorParcela } from "../Controladores/ControladorParcela";
 const RotasParcela = Router();
 const controladorParcela = new ControladorParcela();
 
-RotasParcela.patch("/parcelas/:idParcela/pagamento",
-  celebrate(
-    {
-      [Segments.PARAMS]: Joi.object().keys(
-        {
-          idParcela: Joi.string().required().trim(),
-        }
-      ),
-    }
-  ), controladorParcela.RegistrarPagamentoParcela
-)
-
-RotasParcela.get("/parcelas/emprestimo/:idEmprestimo",
-  celebrate(
-    {
-      [Segments.PARAMS]: Joi.object().keys(
-        {
-          idEmprestimo: Joi.string().required().trim(),
-        }
-      ),
-    }
-  ), controladorParcela.ObterParcelasPorEmprestimo
-)
+RotasParcela.get("/parcelas", controladorParcela.ObterTodasParcelas);
 
 RotasParcela.get("/parcelas/:idParcela",
   celebrate(
@@ -39,8 +17,30 @@ RotasParcela.get("/parcelas/:idParcela",
       ),
     }
   ), controladorParcela.ObterParcelasPorId
-)
+);
 
-RotasParcela.get("/parcelas", controladorParcela.ObterTodasParcelas);
+RotasParcela.get("/parcelas/emprestimo/:idEmprestimo",
+  celebrate(
+    {
+      [Segments.PARAMS]: Joi.object().keys(
+        {
+          idEmprestimo: Joi.string().required().trim(),
+        }
+      ),
+    }
+  ), controladorParcela.ObterParcelasPorEmprestimo
+);
+
+RotasParcela.patch("/parcelas/:idParcela/pagamento",
+  celebrate(
+    {
+      [Segments.PARAMS]: Joi.object().keys(
+        {
+          idParcela: Joi.string().required().trim(),
+        }
+      ),
+    }
+  ), controladorParcela.RegistrarPagamentoParcela
+)
 
 export { RotasParcela };

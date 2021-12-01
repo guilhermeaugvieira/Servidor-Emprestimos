@@ -14,12 +14,12 @@ const doc = {
   produces: ['application/json'],
   tags: [
     {
-      name: "Usuarios",
-      description: "Gerencia os usuarios"
+      name: "Usuários",
+      description: "Gerencia os usuários"
     },
     {
-      name: "Emprestimos",
-      description: "Gerencia os emprestimos"
+      name: "Empréstimos",
+      description: "Gerencia os empréstimos"
     },
     {
       name: "Parcelas",

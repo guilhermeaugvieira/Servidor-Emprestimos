@@ -34,7 +34,7 @@ class ControladorEmprestimo {
   }
 
   ObterEmprestimoPorId = async (req: Request, res: Response) : Promise<Response> => {  
-    const { id: idEmprestimo} = req.params
+    const { idEmprestimo} = req.params
     
     try {
       await this._conexao.Conectar();
@@ -53,7 +53,7 @@ class ControladorEmprestimo {
   }
 
   ObterEmprestimoPorUsuario = async (req: Request, res: Response) : Promise<Response> => {  
-    const { id: idUsuario} = req.params
+    const { idUsuario} = req.params
     
     try {
       await this._conexao.Conectar();
@@ -93,12 +93,12 @@ class ControladorEmprestimo {
 
   AtualizarStatusEmprestimo = async (req: Request, res: Response) : Promise<Response> => {  
     const { statusEmprestimo } = req.body;
-    const { id } = req.params;
+    const { idEmprestimo } = req.params;
     
     try {
       await this._conexao.Conectar();
 
-      const resposta = await this._servicoEmprestimo.AtualizarStatusEmprestimo(id, statusEmprestimo);
+      const resposta = await this._servicoEmprestimo.AtualizarStatusEmprestimo(idEmprestimo, statusEmprestimo);
 
       await this._conexao.Disconectar();
 

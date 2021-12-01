@@ -9,12 +9,12 @@
   "basePath": "/api",
   "tags": [
     {
-      "name": "Usuarios",
-      "description": "Gerencia os usuarios"
+      "name": "Usuários",
+      "description": "Gerencia os usuários"
     },
     {
-      "name": "Emprestimos",
-      "description": "Gerencia os emprestimos"
+      "name": "Empréstimos",
+      "description": "Gerencia os empréstimos"
     },
     {
       "name": "Parcelas",
@@ -42,54 +42,67 @@
   "paths": {
     "/emprestimos": {
       "get": {
-        "tags": ["Emprestimos"],
-        "description": "",
+        "tags": ["Empréstimos"],
+        "description": "Obtém todos os empréstimos",
         "parameters": [],
         "responses": {}
       },
       "post": {
-        "tags": ["Emprestimos"],
-        "description": "",
+        "tags": ["Empréstimos"],
+        "description": "Solicita um novo empréstimo",
         "parameters": [],
         "responses": {}
       }
     },
-    "/emprestimos/{id}": {
+    "/emprestimos/{idEmprestimo}": {
       "get": {
-        "tags": ["Emprestimos"],
-        "description": "",
-        "parameters": [],
+        "tags": ["Empréstimos"],
+        "description": "Obtém empréstimo pelo id",
+        "parameters": [
+          {
+            "name": "idEmprestimo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       }
     },
-    "/emprestimos/usuario/{id}": {
+    "/emprestimos/usuario/{idUsuario}": {
       "get": {
-        "tags": ["Emprestimos"],
-        "description": "",
-        "parameters": [],
+        "tags": ["Empréstimos"],
+        "description": "Obtém empréstimos pelo usuário",
+        "parameters": [
+          {
+            "name": "idUsuario",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       }
     },
-    "/emprestimos/{id}/status": {
+    "/emprestimos/{idEmprestimo}/status": {
       "patch": {
-        "tags": ["Emprestimos"],
-        "description": "",
-        "parameters": [],
+        "tags": ["Empréstimos"],
+        "description": "Atualiza o status de aprovação do empréstimo",
+        "parameters": [
+          {
+            "name": "idEmprestimo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       }
     },
-    "/parcelas/{idParcela}/pagamento": {
-      "patch": {
-        "tags": ["Emprestimos"],
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/parcelas/emprestimo/{idEmprestimo}": {
+    "/parcelas": {
       "get": {
-        "tags": ["Emprestimos"],
-        "description": "",
+        "tags": ["Parcelas"],
+        "description": "Obtém todas as parcelas",
         "parameters": [],
         "responses": {}
       }
@@ -97,68 +110,125 @@
     "/parcelas/{idParcela}": {
       "get": {
         "tags": ["Parcelas"],
-        "description": "",
-        "parameters": [],
+        "description": "Obtém parcela por id",
+        "parameters": [
+          {
+            "name": "idParcela",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       }
     },
-    "/parcelas": {
+    "/parcelas/emprestimo/{idEmprestimo}": {
       "get": {
         "tags": ["Parcelas"],
-        "description": "",
-        "parameters": [],
+        "description": "Obtém parcelas pelo emprestimo",
+        "parameters": [
+          {
+            "name": "idEmprestimo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/parcelas/{idParcela}/pagamento": {
+      "patch": {
+        "tags": ["Parcelas"],
+        "description": "Realiza o pagamento da parcela",
+        "parameters": [
+          {
+            "name": "idParcela",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       }
     },
     "/usuarios": {
       "get": {
-        "tags": ["Usuarios"],
-        "description": "",
+        "tags": ["Usuários"],
+        "description": "Obtém todos os usuários",
         "parameters": [],
         "responses": {}
       },
       "post": {
-        "tags": ["Usuarios"],
-        "description": "",
+        "tags": ["Usuários"],
+        "description": "Adiciona um novo usuário",
         "parameters": [],
         "responses": {}
       }
     },
-    "/usuarios/{id}": {
+    "/usuarios/{idUsuario}": {
       "get": {
-        "tags": ["Usuarios"],
-        "description": "",
-        "parameters": [],
+        "tags": ["Usuários"],
+        "description": "Obtém usuário por id",
+        "parameters": [
+          {
+            "name": "idUsuario",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       },
       "delete": {
-        "tags": ["Usuarios"],
-        "description": "",
-        "parameters": [],
+        "tags": ["Usuários"],
+        "description": "Remove o usuário da aplicação",
+        "parameters": [
+          {
+            "name": "idUsuario",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       }
     },
     "/usuarios/login": {
       "post": {
-        "tags": ["Usuarios"],
-        "description": "",
+        "tags": ["Usuários"],
+        "description": "Realiza o login na aplicação",
         "parameters": [],
         "responses": {}
       }
     },
-    "/usuarios/{id}/senha": {
+    "/usuarios/{idUsuario}/senha": {
       "patch": {
-        "tags": ["Usuarios"],
-        "description": "",
-        "parameters": [],
+        "tags": ["Usuários"],
+        "description": "Atualiza a senha do usuário",
+        "parameters": [
+          {
+            "name": "idUsuario",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       }
     },
-    "/usuarios/{id}/habilitar": {
+    "/usuarios/{idUsuario}/habilitar": {
       "patch": {
-        "tags": ["Usuarios"],
-        "description": "",
-        "parameters": [],
+        "tags": ["Usuários"],
+        "description": "Habilita o usuário para login",
+        "parameters": [
+          {
+            "name": "idUsuario",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {}
       }
     }

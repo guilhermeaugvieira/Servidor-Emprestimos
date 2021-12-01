@@ -34,7 +34,7 @@ class ControladorUsuario {
   }
 
   ObterUsuarioPorId = async (req: Request, res: Response) : Promise<Response> => {
-    const { id: idUsuario} = req.params
+    const { idUsuario} = req.params
     
     try {
       await this._conexao.Conectar();
@@ -83,12 +83,12 @@ class ControladorUsuario {
   }
 
   RemoverUsuario = async (req: Request, res: Response) : Promise<Response> => {
-    const { id } = req.params;
+    const { idUsuario } = req.params;
     
     try {
       await this._conexao.Conectar();
 
-      const resposta = await this._servicoUsuario.RemoverUsuario(id);
+      const resposta = await this._servicoUsuario.RemoverUsuario(idUsuario);
 
       await this._conexao.Disconectar();
 
@@ -100,7 +100,7 @@ class ControladorUsuario {
 
   AtualizarSenha = async (req: Request, res: Response) : Promise<Response> => {
     const { senha } = req.body;
-    const { id: idUsuario} = req.params
+    const { idUsuario} = req.params
     
     try {
       await this._conexao.Conectar();
@@ -117,7 +117,7 @@ class ControladorUsuario {
 
 
   HabilitarUsuario = async (req: Request, res: Response) : Promise<Response> => {
-    const { id: idUsuario} = req.params
+    const { idUsuario} = req.params
     
     try {
       await this._conexao.Conectar();

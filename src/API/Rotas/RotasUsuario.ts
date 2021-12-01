@@ -7,7 +7,7 @@ const controladorUsuario = new ControladorUsuario();
 
 RotasUsuario.get("/usuarios", controladorUsuario.ObterTodosUsuarios);
 
-RotasUsuario.get("/usuarios/:id",
+RotasUsuario.get("/usuarios/:idUsuario",
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
@@ -47,19 +47,7 @@ RotasUsuario.post("/usuarios/login",
   ), controladorUsuario.Login
 );
 
-RotasUsuario.delete("/usuarios/:id",
-  celebrate(
-    {
-      [Segments.PARAMS]: Joi.object().keys(
-        {
-          id: Joi.string().required().trim(),
-        }
-      ),
-    }
-  ), controladorUsuario.RemoverUsuario
-);
-
-RotasUsuario.patch("/usuarios/:id/senha",
+RotasUsuario.patch("/usuarios/:idUsuario/senha",
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(
@@ -74,9 +62,9 @@ RotasUsuario.patch("/usuarios/:id/senha",
       ),
     }
   ), controladorUsuario.AtualizarSenha
-)
+);
 
-RotasUsuario.patch("/usuarios/:id/habilitar",
+RotasUsuario.patch("/usuarios/:idUsuario/habilitar",
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
@@ -86,7 +74,19 @@ RotasUsuario.patch("/usuarios/:id/habilitar",
       ),
     }
   ), controladorUsuario.HabilitarUsuario
-)
+);
+
+RotasUsuario.delete("/usuarios/:idUsuario",
+  celebrate(
+    {
+      [Segments.PARAMS]: Joi.object().keys(
+        {
+          id: Joi.string().required().trim(),
+        }
+      ),
+    }
+  ), controladorUsuario.RemoverUsuario
+);
 
 RotasUsuario.use(errors());
 

@@ -7,24 +7,24 @@ const controladorEmprestimo = new ControladorEmprestimo();
 
 RotasEmprestimo.get("/emprestimos", controladorEmprestimo.ObterTodosEmprestimos);
 
-RotasEmprestimo.get("/emprestimos/:id",
+RotasEmprestimo.get("/emprestimos/:idEmprestimo",
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
         {
-          id: Joi.string().required().trim(),
+          idEmprestimo: Joi.string().required().trim(),
         }
       ),
     }
   ), controladorEmprestimo.ObterEmprestimoPorId
 );
 
-RotasEmprestimo.get("/emprestimos/usuario/:id",
+RotasEmprestimo.get("/emprestimos/usuario/:idUsuario",
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
         {
-          id: Joi.string().required().trim(),
+          idUsuario: Joi.string().required().trim(),
         }
       ),
     }
@@ -45,7 +45,7 @@ RotasEmprestimo.post("/emprestimos",
   ), controladorEmprestimo.SolicitarEmprestimo
 );
 
-RotasEmprestimo.patch("/emprestimos/:id/status",
+RotasEmprestimo.patch("/emprestimos/:idEmprestimo/status",
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(
@@ -55,7 +55,7 @@ RotasEmprestimo.patch("/emprestimos/:id/status",
       ),
       [Segments.PARAMS]: Joi.object().keys(
         {
-          id: Joi.string().required().trim(),
+          idEmprestimo: Joi.string().required().trim(),
         }
       ),
     }
