@@ -135,6 +135,10 @@ class ServicoEmprestimo implements IServicoEmprestimo{
 
     const referenciaHistoricoEmprestimo = await RepositorioHistoricoEmprestimo.findOne({ Id_Emprestimo: idEmprestimo });
 
+    if (referenciaHistoricoEmprestimo.Aprovado !== "Em análise") {
+      throw new Error("Empréstimo já foi analisado");
+    }
+
     referenciaHistoricoEmprestimo.Aprovado = statusEmprestimo;
 
     await RepositorioHistoricoEmprestimo.updateOne(referenciaHistoricoEmprestimo);
