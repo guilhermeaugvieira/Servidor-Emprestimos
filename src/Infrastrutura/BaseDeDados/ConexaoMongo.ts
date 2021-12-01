@@ -9,7 +9,7 @@ class ConexaoMongo implements IConexaoMongo{
     if (this.baseDeDados) return;
 
     try {
-      await connect(`mongodb://${process.env.DATABASE_ADDRESS}:${process.env.MONGO_PORT}/${process.env.DATABASE_NAME}`);
+      await connect(`mongodb://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_ADDRESS}:${process.env.MONGO_PORT}/${process.env.DATABASE_NAME}`);
 
       this.baseDeDados = connection;
     } catch(error) {

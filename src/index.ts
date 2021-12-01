@@ -1,9 +1,7 @@
 import "reflect-metadata";
 import dotenv from "dotenv";
 
-dotenv.config({
-  path: "./src/API/Configuracoes/.env",
-});
+dotenv.config();
 
 import "./API/Configuracoes/InjecaoDependencia";
 import { Servidor } from "./Infrastrutura/Servidor/Servidor";
