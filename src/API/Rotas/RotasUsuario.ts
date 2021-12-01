@@ -5,9 +5,21 @@ import { ControladorUsuario } from "../Controladores/ControladorUsuario";
 const RotasUsuario = Router();
 const controladorUsuario = new ControladorUsuario();
 
-RotasUsuario.get("/usuario", controladorUsuario.ObterTodosUsuarios);
+RotasUsuario.get("/usuarios", controladorUsuario.ObterTodosUsuarios);
 
-RotasUsuario.post("/usuario",
+RotasUsuario.get("/usuarios/:id",
+  celebrate(
+    {
+      [Segments.PARAMS]: Joi.object().keys(
+        {
+          id: Joi.string().required().trim(),
+        }
+      ),
+    }
+  ), controladorUsuario.ObterUsuarioPorId
+);
+
+RotasUsuario.post("/usuarios",
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(
@@ -22,7 +34,7 @@ RotasUsuario.post("/usuario",
   ), controladorUsuario.AdicionarUsuario
 );
 
-RotasUsuario.post("/usuario/login",
+RotasUsuario.post("/usuarios/login",
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(
@@ -35,7 +47,7 @@ RotasUsuario.post("/usuario/login",
   ), controladorUsuario.Login
 );
 
-RotasUsuario.delete("/usuario/:id",
+RotasUsuario.delete("/usuarios/:id",
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
@@ -47,7 +59,7 @@ RotasUsuario.delete("/usuario/:id",
   ), controladorUsuario.RemoverUsuario
 );
 
-RotasUsuario.patch("/usuario/:id/senha",
+RotasUsuario.patch("/usuarios/:id/senha",
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(
@@ -64,7 +76,7 @@ RotasUsuario.patch("/usuario/:id/senha",
   ), controladorUsuario.AtualizarSenha
 )
 
-RotasUsuario.patch("/usuario/:id/habilitar",
+RotasUsuario.patch("/usuarios/:id/habilitar",
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(

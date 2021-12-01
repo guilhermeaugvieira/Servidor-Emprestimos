@@ -1,5 +1,4 @@
 import { LeanDocument } from "mongoose";
-import { inject, injectable, Lifecycle, scoped } from "tsyringe";
 import { RepositorioEmprestimo } from "../../Dados/Repositorios/RepositorioEmprestimo";
 import { RepositorioUsuario } from "../../Dados/Repositorios/RepositorioUsuario";
 import { IServicoUsuario } from "../Interfaces/IServicoUsuario";
@@ -9,9 +8,17 @@ class ServicoUsuario implements IServicoUsuario{
   constructor(){}
   
   async ObterTodosUsuarios(): Promise<LeanDocument<any>[] | null> {
-    const todosUsuarios = await RepositorioUsuario.find({}).lean().exec();
+    return await RepositorioUsuario.find({});
+  }
 
-    return todosUsuarios;
+  async ObterUsuarioPorId(id: string): Promise<LeanDocument<any>[] | null> {
+    const usuario = await RepositorioUsuario.findById(id);
+
+    if (usuario === null) {
+      throw new Error("Não foi possivel encontrar o usuario com o id informado");
+    }
+
+    return usuario;
   }
   
   async AdicionarUsuario(email: string, nome: string, cpf: string, senha: string): Promise<any> {
@@ -42,7 +49,7 @@ class ServicoUsuario implements IServicoUsuario{
       throw new Error("CPF ou Senha inválido");
     }
 
-    if (!usuario.Habilitado) {
+    if (usuario.Habilitado === false) {
       throw new Error("Usuário desabilitado");
     }
 

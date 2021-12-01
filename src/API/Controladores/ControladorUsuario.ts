@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { ConexaoMongo } from '../../Infrastrutura/BaseDeDados/ConexaoMongo';
-import { container, inject, injectable } from 'tsyringe';
+import { container } from 'tsyringe';
 import { IServicoUsuario } from '../../Aplicacao/Interfaces/IServicoUsuario';
 import { IConexaoMongo } from '../../Infrastrutura/Interfaces/IConexaoMongo';
 import { RespostaErro } from '../../Negocio/Models/Comum/RespostaErro';
@@ -8,8 +8,6 @@ import { RespostaOk } from '../../Negocio/Models/Comum/RespostaOk';
 import { ServicoUsuario } from '../../Aplicacao/Servicos/ServicoUsuario';
 
 class ControladorUsuario {
-  conexao : ConexaoMongo = null;
-
   private _servicoUsuario: IServicoUsuario;
   private _conexao: IConexaoMongo;
   
@@ -30,6 +28,22 @@ class ControladorUsuario {
 
       return res.status(200).json(new RespostaOk<Object>(resposta));
     
+    } catch (error : any) {
+      return res.json(new RespostaErro(error.message));
+    }
+  }
+
+  ObterUsuarioPorId = async (req: Request, res: Response) : Promise<Response> => {
+    const { id: idUsuario} = req.params
+    
+    try {
+      await this._conexao.Conectar();
+
+      const resposta = await this._servicoUsuario.ObterUsuarioPorId(idUsuario);
+
+      await this._conexao.Disconectar();
+
+      return res.status(200).json(new RespostaOk<Object>(resposta));
     } catch (error : any) {
       return res.json(new RespostaErro(error.message));
     }

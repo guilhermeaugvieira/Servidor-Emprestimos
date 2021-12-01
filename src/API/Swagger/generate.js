@@ -14,8 +14,16 @@ const doc = {
   produces: ['application/json'],
   tags: [
     {
-      name: "Usuario",
+      name: "Usuarios",
       description: "Gerencia os usuarios"
+    },
+    {
+      name: "Emprestimos",
+      description: "Gerencia os emprestimos"
+    },
+    {
+      name: "Parcelas",
+      description: "Gerencia as parcelas"
     }
   ],
   securityDefinitions: {

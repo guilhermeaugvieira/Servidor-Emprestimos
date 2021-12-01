@@ -9,8 +9,16 @@
   "basePath": "/api",
   "tags": [
     {
-      "name": "Usuario",
+      "name": "Usuarios",
       "description": "Gerencia os usuarios"
+    },
+    {
+      "name": "Emprestimos",
+      "description": "Gerencia os emprestimos"
+    },
+    {
+      "name": "Parcelas",
+      "description": "Gerencia as parcelas"
     }
   ],
   "schemes": [
@@ -32,47 +40,123 @@
     "application/json"
   ],
   "paths": {
-    "/usuario": {
+    "/emprestimos": {
       "get": {
-        "tags": ["Usuario"],
+        "tags": ["Emprestimos"],
         "description": "",
         "parameters": [],
         "responses": {}
       },
       "post": {
-        "tags": ["Usuario"],
+        "tags": ["Emprestimos"],
         "description": "",
         "parameters": [],
         "responses": {}
       }
     },
-    "/usuario/login": {
+    "/emprestimos/{id}": {
+      "get": {
+        "tags": ["Emprestimos"],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/emprestimos/usuario/{id}": {
+      "get": {
+        "tags": ["Emprestimos"],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/emprestimos/{id}/status": {
+      "patch": {
+        "tags": ["Emprestimos"],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/parcelas/{idParcela}/pagamento": {
+      "patch": {
+        "tags": ["Emprestimos"],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/parcelas/emprestimo/{idEmprestimo}": {
+      "get": {
+        "tags": ["Emprestimos"],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/parcelas/{idParcela}": {
+      "get": {
+        "tags": ["Parcelas"],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/parcelas": {
+      "get": {
+        "tags": ["Parcelas"],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/usuarios": {
+      "get": {
+        "tags": ["Usuarios"],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
       "post": {
-        "tags": ["Usuario"],
+        "tags": ["Usuarios"],
         "description": "",
         "parameters": [],
         "responses": {}
       }
     },
-    "/usuario/{id}": {
+    "/usuarios/{id}": {
+      "get": {
+        "tags": ["Usuarios"],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
       "delete": {
-        "tags": ["Usuario"],
+        "tags": ["Usuarios"],
         "description": "",
         "parameters": [],
         "responses": {}
       }
     },
-    "/usuario/{id}/senha": {
-      "patch": {
-        "tags": ["Usuario"],
+    "/usuarios/login": {
+      "post": {
+        "tags": ["Usuarios"],
         "description": "",
         "parameters": [],
         "responses": {}
       }
     },
-    "/usuario/{id}/habilitar": {
+    "/usuarios/{id}/senha": {
       "patch": {
-        "tags": ["Usuario"],
+        "tags": ["Usuarios"],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/usuarios/{id}/habilitar": {
+      "patch": {
+        "tags": ["Usuarios"],
         "description": "",
         "parameters": [],
         "responses": {}
