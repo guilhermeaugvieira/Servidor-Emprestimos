@@ -5,9 +5,18 @@ import { ControladorUsuario } from "../Controladores/ControladorUsuario";
 const RotasUsuario = Router();
 const controladorUsuario = new ControladorUsuario();
 
-RotasUsuario.get("/usuarios", controladorUsuario.ObterTodosUsuarios);
+RotasUsuario.get("/usuarios", 
+  // #swagger.tags = ['Usuários']
+  // #swagger.summary = 'Obtém todos os usuários'
+  // #swagger.description = 'Retorna todos os usuários cadastrados na aplicação'
+
+  controladorUsuario.ObterTodosUsuarios);
 
 RotasUsuario.get("/usuarios/:idUsuario",
+  // #swagger.tags = ['Usuários']
+  // #swagger.summary = 'Obtém usuario por id'
+  // #swagger.description = 'Realiza a busca do usuário pelo id'
+
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
@@ -20,6 +29,10 @@ RotasUsuario.get("/usuarios/:idUsuario",
 );
 
 RotasUsuario.post("/usuarios",
+  // #swagger.tags = ['Usuários']
+  // #swagger.summary = 'Adiciona um novo usuário'
+  // #swagger.description = 'Solicito o registro de um novo usuário na aplicação'
+
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(
@@ -35,6 +48,10 @@ RotasUsuario.post("/usuarios",
 );
 
 RotasUsuario.post("/usuarios/login",
+  // #swagger.tags = ['Usuários']
+  // #swagger.summary = 'Realiza o login na aplicação'
+  // #swagger.description = 'Realiza o login na aplicação se o usuário for habilitado'
+
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(
@@ -48,6 +65,10 @@ RotasUsuario.post("/usuarios/login",
 );
 
 RotasUsuario.patch("/usuarios/:idUsuario/senha",
+  // #swagger.tags = ['Usuários']
+  // #swagger.summary = 'Atualiza a senha do usuário'
+  // #swagger.description = 'Atualiza a senha do usuário cadastrado'
+
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(
@@ -65,6 +86,10 @@ RotasUsuario.patch("/usuarios/:idUsuario/senha",
 );
 
 RotasUsuario.patch("/usuarios/:idUsuario/habilitar",
+  // #swagger.tags = ['Usuários']
+  // #swagger.summary = 'Habilita um usuário para acesso na aplicação'
+  // #swagger.description = 'Atualiza o status do usuário para habilitado'
+
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
@@ -77,6 +102,10 @@ RotasUsuario.patch("/usuarios/:idUsuario/habilitar",
 );
 
 RotasUsuario.delete("/usuarios/:idUsuario",
+  // #swagger.tags = ['Usuários']
+  // #swagger.summary = 'Remove o usuário'
+  // #swagger.description = 'Remove o usuário se não tiver empréstimos cadastrados'
+
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(

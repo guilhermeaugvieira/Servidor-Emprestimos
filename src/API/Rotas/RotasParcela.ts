@@ -5,9 +5,18 @@ import { ControladorParcela } from "../Controladores/ControladorParcela";
 const RotasParcela = Router();
 const controladorParcela = new ControladorParcela();
 
-RotasParcela.get("/parcelas", controladorParcela.ObterTodasParcelas);
+RotasParcela.get("/parcelas", 
+  // #swagger.tags = ['Parcelas']
+  // #swagger.summary = 'Obtém todas as parcelas'
+  // #swagger.description = 'Obtém todas as parcelas cadastradas na aplicação'
+
+  controladorParcela.ObterTodasParcelas);
 
 RotasParcela.get("/parcelas/:idParcela",
+  // #swagger.tags = ['Parcelas']
+  // #swagger.summary = 'Obtém parcela por Id'
+  // #swagger.description = 'Realiza a busca da parcela e retorna seus dados'
+
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
@@ -20,6 +29,10 @@ RotasParcela.get("/parcelas/:idParcela",
 );
 
 RotasParcela.get("/parcelas/emprestimo/:idEmprestimo",
+  // #swagger.tags = ['Parcelas']
+  // #swagger.summary = 'Obtém todas as parcelas de um empréstimo'
+  // #swagger.description = 'Realiza a busca de todas as parcelas relacionadas ao empréstimo'
+
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
@@ -32,6 +45,10 @@ RotasParcela.get("/parcelas/emprestimo/:idEmprestimo",
 );
 
 RotasParcela.patch("/parcelas/:idParcela/pagamento",
+  // #swagger.tags = ['Parcelas']
+  // #swagger.summary = 'Registra o pagamento de uma parcela'
+  // #swagger.description = 'Adiciona a data do pagamento nos dados da parcela'
+
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(

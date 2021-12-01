@@ -5,9 +5,18 @@ import { ControladorEmprestimo } from "../Controladores/ControladorEmprestimo";
 const RotasEmprestimo = Router();
 const controladorEmprestimo = new ControladorEmprestimo();
 
-RotasEmprestimo.get("/emprestimos", controladorEmprestimo.ObterTodosEmprestimos);
+RotasEmprestimo.get("/emprestimos", 
+  // #swagger.tags = ['Empréstimos']
+  // #swagger.summary = 'Obtém todos os empréstimos'
+  // #swagger.description = 'Retorna todos os empréstimos cadastrados na aplicação'
+
+  controladorEmprestimo.ObterTodosEmprestimos);
 
 RotasEmprestimo.get("/emprestimos/:idEmprestimo",
+  // #swagger.tags = ['Empréstimos']
+  // #swagger.summary = 'Obtém empréstimo por id'
+  // #swagger.description = 'Realiza a busca do empréstimo pelo id e retorna os dados do empréstimo'
+
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
@@ -20,6 +29,10 @@ RotasEmprestimo.get("/emprestimos/:idEmprestimo",
 );
 
 RotasEmprestimo.get("/emprestimos/usuario/:idUsuario",
+  // #swagger.tags = ['Empréstimos']
+  // #swagger.summary = 'Obtém todos os empréstimo de um usuário'
+  // #swagger.description = 'Retorna os dados de todos os empréstimos realizado pelo usuário'
+
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
@@ -32,6 +45,10 @@ RotasEmprestimo.get("/emprestimos/usuario/:idUsuario",
 );
 
 RotasEmprestimo.post("/emprestimos",
+  // #swagger.tags = ['Empréstimos']
+  // #swagger.summary = 'Solicita um novo empréstimo'
+  // #swagger.description = 'Registra uma solicitação de empréstimo'
+
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(
@@ -46,6 +63,10 @@ RotasEmprestimo.post("/emprestimos",
 );
 
 RotasEmprestimo.patch("/emprestimos/:idEmprestimo/status",
+  // #swagger.tags = ['Empréstimos']
+  // #swagger.summary = 'Atualiza o status de aprovação do empréstimo'
+  // #swagger.description = 'Atualiza o status de empréstimos em fase de análise'
+
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(

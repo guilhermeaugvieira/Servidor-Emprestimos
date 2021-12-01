@@ -42,22 +42,31 @@
   "paths": {
     "/emprestimos": {
       "get": {
-        "tags": ["Empréstimos"],
-        "description": "Obtém todos os empréstimos",
+        "tags": [
+          "Empréstimos"
+        ],
+        "summary": "Obtém todos os empréstimos",
+        "description": "Retorna todos os empréstimos cadastrados na aplicação",
         "parameters": [],
         "responses": {}
       },
       "post": {
-        "tags": ["Empréstimos"],
-        "description": "Solicita um novo empréstimo",
+        "tags": [
+          "Empréstimos"
+        ],
+        "summary": "Solicita um novo empréstimo",
+        "description": "Registra uma solicitação de empréstimo",
         "parameters": [],
         "responses": {}
       }
     },
     "/emprestimos/{idEmprestimo}": {
       "get": {
-        "tags": ["Empréstimos"],
-        "description": "Obtém empréstimo pelo id",
+        "tags": [
+          "Empréstimos"
+        ],
+        "summary": "Obtém empréstimo por id",
+        "description": "Realiza a busca do empréstimo pelo id e retorna os dados do empréstimo",
         "parameters": [
           {
             "name": "idEmprestimo",
@@ -71,8 +80,11 @@
     },
     "/emprestimos/usuario/{idUsuario}": {
       "get": {
-        "tags": ["Empréstimos"],
-        "description": "Obtém empréstimos pelo usuário",
+        "tags": [
+          "Empréstimos"
+        ],
+        "summary": "Obtém todos os empréstimo de um usuário",
+        "description": "Retorna os dados de todos os empréstimos realizado pelo usuário",
         "parameters": [
           {
             "name": "idUsuario",
@@ -86,8 +98,11 @@
     },
     "/emprestimos/{idEmprestimo}/status": {
       "patch": {
-        "tags": ["Empréstimos"],
-        "description": "Atualiza o status de aprovação do empréstimo",
+        "tags": [
+          "Empréstimos"
+        ],
+        "summary": "Atualiza o status de aprovação do empréstimo",
+        "description": "Atualiza o status de empréstimos em fase de análise",
         "parameters": [
           {
             "name": "idEmprestimo",
@@ -101,16 +116,22 @@
     },
     "/parcelas": {
       "get": {
-        "tags": ["Parcelas"],
-        "description": "Obtém todas as parcelas",
+        "tags": [
+          "Parcelas"
+        ],
+        "summary": "Obtém todas as parcelas",
+        "description": "Obtém todas as parcelas cadastradas na aplicação",
         "parameters": [],
         "responses": {}
       }
     },
     "/parcelas/{idParcela}": {
       "get": {
-        "tags": ["Parcelas"],
-        "description": "Obtém parcela por id",
+        "tags": [
+          "Parcelas"
+        ],
+        "summary": "Obtém parcela por Id",
+        "description": "Realiza a busca da parcela e retorna seus dados",
         "parameters": [
           {
             "name": "idParcela",
@@ -124,8 +145,11 @@
     },
     "/parcelas/emprestimo/{idEmprestimo}": {
       "get": {
-        "tags": ["Parcelas"],
-        "description": "Obtém parcelas pelo emprestimo",
+        "tags": [
+          "Parcelas"
+        ],
+        "summary": "Obtém todas as parcelas de um empréstimo",
+        "description": "Realiza a busca de todas as parcelas relacionadas ao empréstimo",
         "parameters": [
           {
             "name": "idEmprestimo",
@@ -139,8 +163,11 @@
     },
     "/parcelas/{idParcela}/pagamento": {
       "patch": {
-        "tags": ["Parcelas"],
-        "description": "Realiza o pagamento da parcela",
+        "tags": [
+          "Parcelas"
+        ],
+        "summary": "Registra o pagamento de uma parcela",
+        "description": "Adiciona a data do pagamento nos dados da parcela",
         "parameters": [
           {
             "name": "idParcela",
@@ -154,22 +181,31 @@
     },
     "/usuarios": {
       "get": {
-        "tags": ["Usuários"],
-        "description": "Obtém todos os usuários",
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Obtém todos os usuários",
+        "description": "Retorna todos os usuários cadastrados na aplicação",
         "parameters": [],
         "responses": {}
       },
       "post": {
-        "tags": ["Usuários"],
-        "description": "Adiciona um novo usuário",
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Adiciona um novo usuário",
+        "description": "Solicito o registro de um novo usuário na aplicação",
         "parameters": [],
         "responses": {}
       }
     },
     "/usuarios/{idUsuario}": {
       "get": {
-        "tags": ["Usuários"],
-        "description": "Obtém usuário por id",
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Obtém usuario por id",
+        "description": "Realiza a busca do usuário pelo id",
         "parameters": [
           {
             "name": "idUsuario",
@@ -181,8 +217,11 @@
         "responses": {}
       },
       "delete": {
-        "tags": ["Usuários"],
-        "description": "Remove o usuário da aplicação",
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Remove o usuário",
+        "description": "Remove o usuário se não tiver empréstimos cadastrados",
         "parameters": [
           {
             "name": "idUsuario",
@@ -196,16 +235,22 @@
     },
     "/usuarios/login": {
       "post": {
-        "tags": ["Usuários"],
-        "description": "Realiza o login na aplicação",
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Realiza o login na aplicação",
+        "description": "Realiza o login na aplicação se o usuário for habilitado",
         "parameters": [],
         "responses": {}
       }
     },
     "/usuarios/{idUsuario}/senha": {
       "patch": {
-        "tags": ["Usuários"],
-        "description": "Atualiza a senha do usuário",
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Atualiza a senha do usuário",
+        "description": "Atualiza a senha do usuário cadastrado",
         "parameters": [
           {
             "name": "idUsuario",
@@ -219,8 +264,11 @@
     },
     "/usuarios/{idUsuario}/habilitar": {
       "patch": {
-        "tags": ["Usuários"],
-        "description": "Habilita o usuário para login",
+        "tags": [
+          "Usuários"
+        ],
+        "summary": "Habilita um usuário para acesso na aplicação",
+        "description": "Atualiza o status do usuário para habilitado",
         "parameters": [
           {
             "name": "idUsuario",
