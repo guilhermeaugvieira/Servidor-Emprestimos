@@ -13,6 +13,12 @@ RotasEmprestimo.get("/emprestimos",
     #swagger.responses[204] = {
       'description': 'No Content',
     }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaObterEmprestimos'
+      }
+    }
   */
 
   controladorEmprestimo.ObterTodosEmprestimos);
@@ -26,6 +32,12 @@ RotasEmprestimo.get("/emprestimos/:idEmprestimo",
       description: 'Bad Request',
       schema: {
         $ref: '#/definitions/RespostaBadRequest'
+      }
+    }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaObterEmprestimo'
       }
     }
   */
@@ -50,6 +62,12 @@ RotasEmprestimo.get("/emprestimos/usuario/:idUsuario",
       description: 'Bad Request',
       schema: {
         $ref: '#/definitions/RespostaBadRequest'
+      }
+    }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaObterEmprestimos'
       }
     }
   */
@@ -85,6 +103,12 @@ RotasEmprestimo.post("/emprestimos",
         $ref: '#/definitions/RespostaBadRequest'
       }
     }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaSolicitacaoEmprestimo'
+      }
+    }
   */
 
   celebrate(
@@ -118,6 +142,12 @@ RotasEmprestimo.patch("/emprestimos/:idEmprestimo/status",
       description: 'Bad Request',
       schema: {
         $ref: '#/definitions/RespostaBadRequest'
+      }
+    }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaAprovacaoEmprestimo'
       }
     }
   */

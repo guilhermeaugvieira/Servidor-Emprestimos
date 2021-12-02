@@ -13,6 +13,12 @@ RotasParcela.get("/parcelas",
     #swagger.responses[204] = {
       'description': 'No Content',
     }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaObterParcelas'
+      }
+    }
   */
 
   controladorParcela.ObterTodasParcelas);
@@ -26,6 +32,12 @@ RotasParcela.get("/parcelas/:idParcela",
       description: 'Bad Request',
       schema: {
         $ref: '#/definitions/RespostaBadRequest'
+      }
+    }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaObterParcela'
       }
     }
   */
@@ -52,6 +64,12 @@ RotasParcela.get("/parcelas/emprestimo/:idEmprestimo",
         $ref: '#/definitions/RespostaBadRequest'
       }
     }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaObterParcelas'
+      }
+    }
   */
 
   celebrate(
@@ -74,6 +92,12 @@ RotasParcela.patch("/parcelas/:idParcela/pagamento",
       description: 'Bad Request',
       schema: {
         $ref: '#/definitions/RespostaBadRequest'
+      }
+    }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaRegistroPagamentoParcela'
       }
     }
   */

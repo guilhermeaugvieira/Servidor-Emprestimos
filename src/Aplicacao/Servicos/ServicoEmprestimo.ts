@@ -27,10 +27,8 @@ class ServicoEmprestimo implements IServicoEmprestimo{
     const historico = await RepositorioHistoricoEmprestimo.create(novoHistoricoEmprestimo);
 
     return {
-      emprestimo: emprestimo._doc,
-      status: { 
-        Aprovado: historico.Aprovado
-      }
+      ...emprestimo._doc,
+      status: historico.Aprovado
     }
   }
 
@@ -45,9 +43,7 @@ class ServicoEmprestimo implements IServicoEmprestimo{
     for(let i = 0; i < countEmprestimos; i++) {
       let emprestimoAtualizado = {
         ...emprestimos[i]._doc,
-        status: {
-          Aprovado: historicoEmprestimos.find(historico => historico.Id_Emprestimo.toString() === emprestimos[i]._id.toString()).Aprovado
-        }
+        status: historicoEmprestimos.find(historico => historico.Id_Emprestimo.toString() === emprestimos[i]._id.toString()).Aprovado,
       }
 
       if (emprestimoAtualizado.status.Aprovado === "Aprovado") {
@@ -76,9 +72,7 @@ class ServicoEmprestimo implements IServicoEmprestimo{
 
       return {
         ...emprestimo._doc,
-        status: {
-          Aprovado: historico.Aprovado
-        },
+        status: historico.Aprovado,
         parcelas
       };
 
@@ -86,9 +80,7 @@ class ServicoEmprestimo implements IServicoEmprestimo{
 
     return {
       ...emprestimo._doc,
-      status: {
-        Aprovado: historico.Aprovado
-      }
+      status: historico.Aprovado,
     };
   }
 
@@ -109,9 +101,7 @@ class ServicoEmprestimo implements IServicoEmprestimo{
     for(let i = 0; i < countEmprestimos; i++) {
       let emprestimoAtualizado = {
         ...emprestimos[i]._doc,
-        status: {
-          Aprovado: historicoEmprestimos.find(historico => historico.Id_Emprestimo.toString() === emprestimos[i]._id.toString()).Aprovado
-        }
+        status: historicoEmprestimos.find(historico => historico.Id_Emprestimo.toString() === emprestimos[i]._id.toString()).Aprovado,
       }
 
       if (emprestimoAtualizado.status.Aprovado === "Aprovado") {
@@ -139,9 +129,12 @@ class ServicoEmprestimo implements IServicoEmprestimo{
       throw new Error("Empréstimo já foi analisado");
     }
 
-    referenciaHistoricoEmprestimo.Aprovado = statusEmprestimo;
+    const historicoEmprestimoAtualizado = {
+      Id_Emprestimo: referenciaHistoricoEmprestimo.Id_Emprestimo,
+      Aprovado: statusEmprestimo,
+    };    
 
-    await RepositorioHistoricoEmprestimo.updateOne(referenciaHistoricoEmprestimo);
+    await RepositorioHistoricoEmprestimo.updateOne({ _id: referenciaHistoricoEmprestimo._id } , historicoEmprestimoAtualizado);
 
     if (statusEmprestimo === "Aprovado") {
       const valorParcela = emprestimo.Montante / emprestimo.Numero_Prestacoes;
@@ -162,9 +155,7 @@ class ServicoEmprestimo implements IServicoEmprestimo{
   
       return {
         ...emprestimo._doc,
-        status: {
-          Aprovado: "Aprovado"
-        },
+        status: "Aprovado",
         parcelas: insercaoParcelas
       };
     }

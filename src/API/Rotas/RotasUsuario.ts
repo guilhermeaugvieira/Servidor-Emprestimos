@@ -11,7 +11,13 @@ RotasUsuario.get("/usuarios",
     #swagger.summary = 'Obtém todos os usuários'
     #swagger.description = 'Retorna todos os usuários cadastrados na aplicação'
     #swagger.responses[204] = {
-      'description': 'No Content',
+      description: 'No Content',
+    }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaObterUsuarios'
+      }
     }
   */
 
@@ -28,13 +34,19 @@ RotasUsuario.get("/usuarios/:idUsuario",
         $ref: '#/definitions/RespostaBadRequest'
       }
     }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaObterUsuarioId'
+      }
+    }
   */
 
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
         {
-          id: Joi.string().required().trim(),
+          idUsuario: Joi.string().required().trim(),
         }
       ),
     }
@@ -46,7 +58,6 @@ RotasUsuario.post("/usuarios",
     #swagger.tags = ['Usuarios']
     #swagger.summary = 'Adiciona um novo usuário'
     #swagger.description = 'Solicito o registro de um novo usuário na aplicação'
-    #swagger.responses['400']
     #swagger.parameters['body'] = {
       'in': 'body',
       'name': 'body',
@@ -60,6 +71,12 @@ RotasUsuario.post("/usuarios",
       description: 'Bad Request',
       schema: {
         $ref: '#/definitions/RespostaBadRequest'
+      }
+    }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaAdicionarUsuario'
       }
     }
   */
@@ -98,6 +115,12 @@ RotasUsuario.post("/usuarios/login",
         $ref: '#/definitions/RespostaBadRequest'
       }
     }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaUsuarioLogin'
+      }
+    }
   */
 
   celebrate(
@@ -132,6 +155,12 @@ RotasUsuario.patch("/usuarios/:idUsuario/senha",
         $ref: '#/definitions/RespostaBadRequest'
       }
     }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaUsuarioAtualizarSenha'
+      }
+    }
   */
 
   celebrate(
@@ -143,7 +172,7 @@ RotasUsuario.patch("/usuarios/:idUsuario/senha",
       ),
       [Segments.PARAMS]: Joi.object().keys(
         {
-          id: Joi.string().required().trim(),
+          idUsuario: Joi.string().required().trim(),
         }
       ),
     }
@@ -161,13 +190,19 @@ RotasUsuario.patch("/usuarios/:idUsuario/habilitar",
         $ref: '#/definitions/RespostaBadRequest'
       }
     }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaHabilitarUsuario'
+      }
+    }
   */
 
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
         {
-          id: Joi.string().required().trim(),
+          idUsuario: Joi.string().required().trim(),
         }
       ),
     }
@@ -185,13 +220,19 @@ RotasUsuario.delete("/usuarios/:idUsuario",
         $ref: '#/definitions/RespostaBadRequest'
       }
     }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaRemoverUsuario'
+      }
+    }
   */
 
   celebrate(
     {
       [Segments.PARAMS]: Joi.object().keys(
         {
-          id: Joi.string().required().trim(),
+          idUsuario: Joi.string().required().trim(),
         }
       ),
     }

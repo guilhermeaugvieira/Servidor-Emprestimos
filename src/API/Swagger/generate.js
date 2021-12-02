@@ -60,6 +60,156 @@ const doc = {
       data: false,
       erro: '',
     },
+    RespostaObterUsuarios: {
+      sucesso: true,
+      dados: [
+        {
+          _id: '',
+          Email: '',
+          Nome: '',
+          Cpf: '',
+          Senha: '',
+          Habilitado: false,
+        }
+      ]
+    },
+    RespostaAdicionarUsuario: {
+      sucesso: true,
+      dados: {
+        _id: '',
+        Email: '',
+        Nome: '',
+        Cpf: '',
+        Senha: '',
+        Habilitado: false,
+      }
+    },
+    RespostaObterUsuarioId: {
+      sucesso: true,
+      dados: {
+        _id: '',
+        Email: '',
+        Nome: '',
+        Cpf: '',
+        Senha: '',
+        Habilitado: false,
+      }
+    },
+    RespostaRemoverUsuario: {
+      sucesso: true,
+      dados: "Usuário removido com sucesso",
+    },
+    RespostaUsuarioLogin: {
+      sucesso: true,
+      dados: {
+        Id: '',
+        Email: '',
+        Nome: '',
+        Cpf: '',
+      }
+    },
+    RespostaUsuarioAtualizarSenha: {
+      sucesso: true,
+      dados: "Senha atualizada com sucesso"
+    },
+    RespostaHabilitarUsuario: {
+      sucesso: true,
+      dados: "Usuário habilitado com sucesso"
+    },
+    RespostaObterEmprestimos: {
+      sucesso: true,
+      dados: [
+        {
+          _id: "",
+          Id_Usuario: "",
+          Data_Solicitacao: new Date(),
+          Montante: 1000,
+          Numero_Prestacoes: 10,
+          status: "Aprovado",
+          parcelas: [
+            {
+              _id: "",
+              Id_Emprestimo: "",
+              Data_Pagamento: new Date,
+              Valor: 1000,
+            }
+          ]
+        }
+      ]
+    },
+    RespostaObterEmprestimo: {
+      sucesso: true,
+      dados: {
+        _id: "",
+        Id_Usuario: "",
+        Data_Solicitacao: new Date(),
+        Montante: 1000,
+        Numero_Prestacoes: 10,
+        status: "Aprovado",
+        parcelas: [
+          {
+            _id: "",
+            Id_Emprestimo: "",
+            Data_Pagamento: new Date,
+            Valor: 1000,
+          }
+        ]
+      }
+    },
+    RespostaSolicitacaoEmprestimo: {
+      sucesso: true,
+      dados: {
+        _id: "",
+        Id_Usuario: "",
+        Data_Solicitacao: new Date(),
+        Montante: 1000,
+        Numero_Prestacoes: 10,
+        status: "Em análise",
+      }
+    },
+    RespostaAprovacaoEmprestimo: {
+      sucesso: true,
+      dados: {
+        _id: "",
+        Id_Usuario: "",
+        Data_Solicitacao: new Date(),
+        Montante: 1000,
+        Numero_Prestacoes: 10,
+        status: "Aprovado",
+        parcelas: [
+          {
+            _id: "",
+            Id_Emprestimo: "",
+            Data_Pagamento: new Date,
+            Valor: 1000,
+          }
+        ]
+      }
+    },
+    RespostaObterParcelas: {
+      sucesso: true,
+      dados: [
+        {
+          _id : '',
+          Id_Emprestimo: '',
+          Data_Pagamento: new Date(),
+          Valor: 1000,
+        }
+      ],
+    },
+    RespostaObterParcela: {
+      sucesso: true,
+      dados: {
+        _id : '',
+        Id_Emprestimo: '',
+        Data_Pagamento: new Date(),
+        Valor: 1000,
+      }
+    },
+    RespostaRegistroPagamentoParcela: {
+      sucesso: true,
+      dados: "Pagamento efetuado com sucesso",
+    }
   }
 }
 
