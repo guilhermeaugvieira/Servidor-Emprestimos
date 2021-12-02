@@ -9,7 +9,7 @@ const doc = {
   },
   host: "localhost:3000",
   basePath: "/api",
-  schemes: ['http', 'https'],
+  schemes: ['http'],
   consumes: ['application/json'],
   produces: ['application/json'],
   tags: [
@@ -35,6 +35,31 @@ const doc = {
     }
   },
   definitions: {
+    InserirUsuario: {
+      email: '',
+      nome: '',
+      cpf: '',
+      senha: '',
+    },
+    LoginUsuario: {
+      cpf: '',
+      senha: ''
+    },
+    AtualizarSenhaUsuario: {
+      senha: '',
+    },
+    AdicionarEmprestimo: {
+      idUsuario: '',
+      montante: 1,
+      numeroPrestacoes: 1
+    },
+    StatusEmprestimo: {
+      statusEmprestimo: 'Reprovado'
+    },
+    RespostaBadRequest: {
+      data: false,
+      erro: '',
+    },
   }
 }
 
