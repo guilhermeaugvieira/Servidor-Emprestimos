@@ -6,16 +6,41 @@ const RotasEmprestimo = Router();
 const controladorEmprestimo = new ControladorEmprestimo();
 
 RotasEmprestimo.get("/emprestimos", 
-  // #swagger.tags = ['Emprestimos']
-  // #swagger.summary = 'Obtém todos os empréstimos'
-  // #swagger.description = 'Retorna todos os empréstimos cadastrados na aplicação'
+  /*
+    #swagger.tags = ['Emprestimos']
+    #swagger.summary = 'Obtém todos os empréstimos'
+    #swagger.description = 'Retorna todos os empréstimos cadastrados na aplicação'
+    #swagger.responses[204] = {
+      'description': 'No Content',
+    }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaObterEmprestimos'
+      }
+    }
+  */
 
   controladorEmprestimo.ObterTodosEmprestimos);
 
 RotasEmprestimo.get("/emprestimos/:idEmprestimo",
-  // #swagger.tags = ['Emprestimos']
-  // #swagger.summary = 'Obtém empréstimo por id'
-  // #swagger.description = 'Realiza a busca do empréstimo pelo id e retorna os dados do empréstimo'
+  /*
+    #swagger.tags = ['Emprestimos']
+    #swagger.summary = 'Obtém empréstimo por id'
+    #swagger.description = 'Realiza a busca do empréstimo pelo id e retorna os dados do empréstimo'
+    #swagger.responses[400] = {
+      description: 'Bad Request',
+      schema: {
+        $ref: '#/definitions/RespostaBadRequest'
+      }
+    }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaObterEmprestimo'
+      }
+    }
+  */
 
   celebrate(
     {
@@ -29,9 +54,23 @@ RotasEmprestimo.get("/emprestimos/:idEmprestimo",
 );
 
 RotasEmprestimo.get("/emprestimos/usuario/:idUsuario",
-  // #swagger.tags = ['Emprestimos']
-  // #swagger.summary = 'Obtém todos os empréstimo de um usuário'
-  // #swagger.description = 'Retorna os dados de todos os empréstimos realizado pelo usuário'
+  /*
+    #swagger.tags = ['Emprestimos']
+    #swagger.summary = 'Obtém todos os empréstimo de um usuário'
+    #swagger.description = 'Retorna os dados de todos os empréstimos realizado pelo usuário']
+    #swagger.responses[400] = {
+      description: 'Bad Request',
+      schema: {
+        $ref: '#/definitions/RespostaBadRequest'
+      }
+    }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaObterEmprestimos'
+      }
+    }
+  */
 
   celebrate(
     {
@@ -45,17 +84,40 @@ RotasEmprestimo.get("/emprestimos/usuario/:idUsuario",
 );
 
 RotasEmprestimo.post("/emprestimos",
-  // #swagger.tags = ['Emprestimos']
-  // #swagger.summary = 'Solicita um novo empréstimo'
-  // #swagger.description = 'Registra uma solicitação de empréstimo'
+  /*
+    #swagger.tags = ['Emprestimos']
+    #swagger.summary = 'Solicita um novo empréstimo'
+    #swagger.description = 'Registra uma solicitação de empréstimo'
+    #swagger.parameters['body'] = {
+      'in': 'body',
+      'name': 'body',
+      'description' : 'Novo empréstimo',
+      'required' : 'true',
+      'schema' : {
+        '$ref' : '#/definitions/AdicionarEmprestimo'
+      }
+    }
+    #swagger.responses[400] = {
+      description: 'Bad Request',
+      schema: {
+        $ref: '#/definitions/RespostaBadRequest'
+      }
+    }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaSolicitacaoEmprestimo'
+      }
+    }
+  */
 
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(
         {
           idUsuario: Joi.string().required().trim(),
-          montante: Joi.number().required(),
-          numeroPrestacoes: Joi.number().required(),
+          montante: Joi.number().required().min(1),
+          numeroPrestacoes: Joi.number().required().min(1),
         }
       ),
     }
@@ -63,15 +125,38 @@ RotasEmprestimo.post("/emprestimos",
 );
 
 RotasEmprestimo.patch("/emprestimos/:idEmprestimo/status",
-  // #swagger.tags = ['Emprestimos']
-  // #swagger.summary = 'Atualiza o status de aprovação do empréstimo'
-  // #swagger.description = 'Atualiza o status de empréstimos em fase de análise'
+  /*
+    #swagger.tags = ['Emprestimos']
+    #swagger.summary = 'Atualiza o status de aprovação do empréstimo'
+    #swagger.description = 'Atualiza o status de empréstimos em fase de análise'
+    #swagger.parameters['body'] = {
+      'in': 'body',
+      'name': 'body',
+      'description' : 'Status empréstimo',
+      'required' : 'true',
+      'schema' : {
+        '$ref' : '#/definitions/StatusEmprestimo'
+      }
+    }
+    #swagger.responses[400] = {
+      description: 'Bad Request',
+      schema: {
+        $ref: '#/definitions/RespostaBadRequest'
+      }
+    }
+    #swagger.responses[200] = {
+      description: 'Ok',
+      schema: {
+        $ref: '#/definitions/RespostaAprovacaoEmprestimo'
+      }
+    }
+  */
 
   celebrate(
     {
       [Segments.BODY]: Joi.object().keys(
         {
-          statusEmprestimo: Joi.string().required(),
+          statusEmprestimo: Joi.string().required().valid('Aprovado', 'Reprovado'),
         }
       ),
       [Segments.PARAMS]: Joi.object().keys(

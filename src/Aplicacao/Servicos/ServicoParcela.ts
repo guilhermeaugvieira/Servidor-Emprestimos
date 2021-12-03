@@ -16,7 +16,11 @@ class ServicoParcela implements IServicoParcela{
 
     const pagamentoParcela = await RepositorioParcela.updateOne({_id: idParcela}, { Data_Recebimento: new Date()});
 
-    return pagamentoParcela.modifiedCount > 0;
+    if (pagamentoParcela.modifiedCount === 0) {
+      throw new Error("Esta parcela já foi paga");
+    }
+
+    return "Pagamento efetuado com sucesso";
   }
 
   async ObterParcelasPorEmprestimo(idEmprestimo: string) : Promise<any> {

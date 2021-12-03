@@ -94,7 +94,7 @@ class ServicoUsuario implements IServicoUsuario {
       Senha: senha,
     });
 
-    if (usuario.length === 0) {
+    if (usuario === null ) {
       throw new Error("CPF ou Senha inválido");
     }
 
@@ -125,9 +125,11 @@ class ServicoUsuario implements IServicoUsuario {
       _id: idUsuario,
     });
 
-    return usuarioRemovido.deletedCount === 1
-      ? "Usuario removido com sucesso"
-      : "Não foi encontrado usuário com esse id";
+    if (usuarioRemovido.deletedCount === 0) {
+      throw new Error("Não foi encontrado usuário com esse id");
+    }
+
+    return "Usuario removido com sucesso";
   }
 
   async AtualizarSenha(idUsuario: string, senha: string): Promise<any> {
@@ -141,7 +143,11 @@ class ServicoUsuario implements IServicoUsuario {
 
     const dadosAtualizados = await RepositorioUsuario.updateOne(dadosUsuario);
 
-    return dadosAtualizados.modifiedCount > 0;
+    if (dadosAtualizados.modifiedCount === 0) {
+      throw new Error("A senha deve ser diferente da anterior");
+    } 
+
+    return "Senha atualizada com sucesso" ;
   }
 
   async HabilitarUsuario(idUsuario: string): Promise<any> {
@@ -151,11 +157,15 @@ class ServicoUsuario implements IServicoUsuario {
       throw new Error("Usuário não encontrado");
     }
 
+    if (dadosUsuario.Habilitado) {
+      throw new Error("Usuário já foi habilitado");
+    }
+
     dadosUsuario.Habilitado = true;
 
-    const dadosAtualizados = await RepositorioUsuario.updateOne(dadosUsuario);
+    await RepositorioUsuario.updateOne(dadosUsuario);
 
-    return dadosAtualizados.modifiedCount > 0;
+    return "Usuário habilitado com sucesso";
   }
 }
 

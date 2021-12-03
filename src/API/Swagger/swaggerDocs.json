@@ -22,8 +22,7 @@
     }
   ],
   "schemes": [
-    "http",
-    "https"
+    "http"
   ],
   "securityDefinitions": {
     "apiKeyAuth": {
@@ -48,7 +47,17 @@
         "summary": "Obtém todos os empréstimos",
         "description": "Retorna todos os empréstimos cadastrados na aplicação",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaObterEmprestimos"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
       },
       "post": {
         "tags": [
@@ -56,8 +65,31 @@
         ],
         "summary": "Solicita um novo empréstimo",
         "description": "Registra uma solicitação de empréstimo",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Novo empréstimo",
+            "required": "true",
+            "schema": {
+              "$ref": "#/definitions/AdicionarEmprestimo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaSolicitacaoEmprestimo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/RespostaBadRequest"
+            }
+          }
+        }
       }
     },
     "/emprestimos/{idEmprestimo}": {
@@ -75,7 +107,20 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaObterEmprestimo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/RespostaBadRequest"
+            }
+          }
+        }
       }
     },
     "/emprestimos/usuario/{idUsuario}": {
@@ -93,7 +138,20 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaObterEmprestimos"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/RespostaBadRequest"
+            }
+          }
+        }
       }
     },
     "/emprestimos/{idEmprestimo}/status": {
@@ -109,9 +167,31 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Status empréstimo",
+            "required": "true",
+            "schema": {
+              "$ref": "#/definitions/StatusEmprestimo"
+            }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaAprovacaoEmprestimo"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/RespostaBadRequest"
+            }
+          }
+        }
       }
     },
     "/parcelas": {
@@ -122,7 +202,17 @@
         "summary": "Obtém todas as parcelas",
         "description": "Obtém todas as parcelas cadastradas na aplicação",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaObterParcelas"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
       }
     },
     "/parcelas/{idParcela}": {
@@ -140,7 +230,20 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaObterParcela"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/RespostaBadRequest"
+            }
+          }
+        }
       }
     },
     "/parcelas/emprestimo/{idEmprestimo}": {
@@ -158,7 +261,20 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaObterParcelas"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/RespostaBadRequest"
+            }
+          }
+        }
       }
     },
     "/parcelas/{idParcela}/pagamento": {
@@ -176,7 +292,20 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaRegistroPagamentoParcela"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/RespostaBadRequest"
+            }
+          }
+        }
       }
     },
     "/usuarios": {
@@ -187,7 +316,17 @@
         "summary": "Obtém todos os usuários",
         "description": "Retorna todos os usuários cadastrados na aplicação",
         "parameters": [],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaObterUsuarios"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
       },
       "post": {
         "tags": [
@@ -195,8 +334,31 @@
         ],
         "summary": "Adiciona um novo usuário",
         "description": "Solicito o registro de um novo usuário na aplicação",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Novo usuário",
+            "required": "true",
+            "schema": {
+              "$ref": "#/definitions/InserirUsuario"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaAdicionarUsuario"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/RespostaBadRequest"
+            }
+          }
+        }
       }
     },
     "/usuarios/{idUsuario}": {
@@ -214,11 +376,24 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaObterUsuarioId"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/RespostaBadRequest"
+            }
+          }
+        }
       },
       "delete": {
         "tags": [
-          "Usuários"
+          "Usuarios"
         ],
         "summary": "Remove o usuário",
         "description": "Remove o usuário se não tiver empréstimos cadastrados",
@@ -230,7 +405,20 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaRemoverUsuario"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/RespostaBadRequest"
+            }
+          }
+        }
       }
     },
     "/usuarios/login": {
@@ -240,14 +428,37 @@
         ],
         "summary": "Realiza o login na aplicação",
         "description": "Realiza o login na aplicação se o usuário for habilitado",
-        "parameters": [],
-        "responses": {}
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Login usuário",
+            "required": "true",
+            "schema": {
+              "$ref": "#/definitions/LoginUsuario"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaUsuarioLogin"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/RespostaBadRequest"
+            }
+          }
+        }
       }
     },
     "/usuarios/{idUsuario}/senha": {
       "patch": {
         "tags": [
-          "Usuários"
+          "Usuarios"
         ],
         "summary": "Atualiza a senha do usuário",
         "description": "Atualiza a senha do usuário cadastrado",
@@ -257,15 +468,37 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Senha usuário",
+            "required": "true",
+            "schema": {
+              "$ref": "#/definitions/AtualizarSenhaUsuario"
+            }
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaUsuarioAtualizarSenha"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/RespostaBadRequest"
+            }
+          }
+        }
       }
     },
     "/usuarios/{idUsuario}/habilitar": {
       "patch": {
         "tags": [
-          "Usuários"
+          "Usuarios"
         ],
         "summary": "Habilita um usuário para acesso na aplicação",
         "description": "Atualiza o status do usuário para habilitado",
@@ -277,9 +510,594 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/RespostaHabilitarUsuario"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/RespostaBadRequest"
+            }
+          }
+        }
       }
     }
   },
-  "definitions": {}
+  "definitions": {
+    "InserirUsuario": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": ""
+        },
+        "nome": {
+          "type": "string",
+          "example": ""
+        },
+        "cpf": {
+          "type": "string",
+          "example": ""
+        },
+        "senha": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "LoginUsuario": {
+      "type": "object",
+      "properties": {
+        "cpf": {
+          "type": "string",
+          "example": ""
+        },
+        "senha": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "AtualizarSenhaUsuario": {
+      "type": "object",
+      "properties": {
+        "senha": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "AdicionarEmprestimo": {
+      "type": "object",
+      "properties": {
+        "idUsuario": {
+          "type": "string",
+          "example": ""
+        },
+        "montante": {
+          "type": "number",
+          "example": 1
+        },
+        "numeroPrestacoes": {
+          "type": "number",
+          "example": 1
+        }
+      }
+    },
+    "StatusEmprestimo": {
+      "type": "object",
+      "properties": {
+        "statusEmprestimo": {
+          "type": "string",
+          "example": "Reprovado"
+        }
+      }
+    },
+    "RespostaBadRequest": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "boolean",
+          "example": false
+        },
+        "erro": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "RespostaObterUsuarios": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": ""
+              },
+              "Email": {
+                "type": "string",
+                "example": ""
+              },
+              "Nome": {
+                "type": "string",
+                "example": ""
+              },
+              "Cpf": {
+                "type": "string",
+                "example": ""
+              },
+              "Senha": {
+                "type": "string",
+                "example": ""
+              },
+              "Habilitado": {
+                "type": "boolean",
+                "example": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "RespostaAdicionarUsuario": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": ""
+            },
+            "Email": {
+              "type": "string",
+              "example": ""
+            },
+            "Nome": {
+              "type": "string",
+              "example": ""
+            },
+            "Cpf": {
+              "type": "string",
+              "example": ""
+            },
+            "Senha": {
+              "type": "string",
+              "example": ""
+            },
+            "Habilitado": {
+              "type": "boolean",
+              "example": false
+            }
+          }
+        }
+      }
+    },
+    "RespostaObterUsuarioId": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": ""
+            },
+            "Email": {
+              "type": "string",
+              "example": ""
+            },
+            "Nome": {
+              "type": "string",
+              "example": ""
+            },
+            "Cpf": {
+              "type": "string",
+              "example": ""
+            },
+            "Senha": {
+              "type": "string",
+              "example": ""
+            },
+            "Habilitado": {
+              "type": "boolean",
+              "example": false
+            }
+          }
+        }
+      }
+    },
+    "RespostaRemoverUsuario": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "string",
+          "example": "Usuário removido com sucesso"
+        }
+      }
+    },
+    "RespostaUsuarioLogin": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "string",
+              "example": ""
+            },
+            "Email": {
+              "type": "string",
+              "example": ""
+            },
+            "Nome": {
+              "type": "string",
+              "example": ""
+            },
+            "Cpf": {
+              "type": "string",
+              "example": ""
+            }
+          }
+        }
+      }
+    },
+    "RespostaUsuarioAtualizarSenha": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "string",
+          "example": "Senha atualizada com sucesso"
+        }
+      }
+    },
+    "RespostaHabilitarUsuario": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "string",
+          "example": "Usuário habilitado com sucesso"
+        }
+      }
+    },
+    "RespostaObterEmprestimos": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": ""
+              },
+              "Id_Usuario": {
+                "type": "string",
+                "example": ""
+              },
+              "Data_Solicitacao": {
+                "type": "object",
+                "properties": {}
+              },
+              "Montante": {
+                "type": "number",
+                "example": 1000
+              },
+              "Numero_Prestacoes": {
+                "type": "number",
+                "example": 10
+              },
+              "status": {
+                "type": "string",
+                "example": "Aprovado"
+              },
+              "parcelas": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "Id_Emprestimo": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "Data_Pagamento": {
+                      "type": "object",
+                      "properties": {}
+                    },
+                    "Valor": {
+                      "type": "number",
+                      "example": 1000
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "RespostaObterEmprestimo": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": ""
+            },
+            "Id_Usuario": {
+              "type": "string",
+              "example": ""
+            },
+            "Data_Solicitacao": {
+              "type": "object",
+              "properties": {}
+            },
+            "Montante": {
+              "type": "number",
+              "example": 1000
+            },
+            "Numero_Prestacoes": {
+              "type": "number",
+              "example": 10
+            },
+            "status": {
+              "type": "string",
+              "example": "Aprovado"
+            },
+            "parcelas": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "Id_Emprestimo": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "Data_Pagamento": {
+                    "type": "object",
+                    "properties": {}
+                  },
+                  "Valor": {
+                    "type": "number",
+                    "example": 1000
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "RespostaSolicitacaoEmprestimo": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": ""
+            },
+            "Id_Usuario": {
+              "type": "string",
+              "example": ""
+            },
+            "Data_Solicitacao": {
+              "type": "object",
+              "properties": {}
+            },
+            "Montante": {
+              "type": "number",
+              "example": 1000
+            },
+            "Numero_Prestacoes": {
+              "type": "number",
+              "example": 10
+            },
+            "status": {
+              "type": "string",
+              "example": "Em análise"
+            }
+          }
+        }
+      }
+    },
+    "RespostaAprovacaoEmprestimo": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": ""
+            },
+            "Id_Usuario": {
+              "type": "string",
+              "example": ""
+            },
+            "Data_Solicitacao": {
+              "type": "object",
+              "properties": {}
+            },
+            "Montante": {
+              "type": "number",
+              "example": 1000
+            },
+            "Numero_Prestacoes": {
+              "type": "number",
+              "example": 10
+            },
+            "status": {
+              "type": "string",
+              "example": "Aprovado"
+            },
+            "parcelas": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "Id_Emprestimo": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "Data_Pagamento": {
+                    "type": "object",
+                    "properties": {}
+                  },
+                  "Valor": {
+                    "type": "number",
+                    "example": 1000
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "RespostaObterParcelas": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": ""
+              },
+              "Id_Emprestimo": {
+                "type": "string",
+                "example": ""
+              },
+              "Data_Pagamento": {
+                "type": "object",
+                "properties": {}
+              },
+              "Valor": {
+                "type": "number",
+                "example": 1000
+              }
+            }
+          }
+        }
+      }
+    },
+    "RespostaObterParcela": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "example": ""
+            },
+            "Id_Emprestimo": {
+              "type": "string",
+              "example": ""
+            },
+            "Data_Pagamento": {
+              "type": "object",
+              "properties": {}
+            },
+            "Valor": {
+              "type": "number",
+              "example": 1000
+            }
+          }
+        }
+      }
+    },
+    "RespostaRegistroPagamentoParcela": {
+      "type": "object",
+      "properties": {
+        "sucesso": {
+          "type": "boolean",
+          "example": true
+        },
+        "dados": {
+          "type": "string",
+          "example": "Pagamento efetuado com sucesso"
+        }
+      }
+    }
+  }
 }
