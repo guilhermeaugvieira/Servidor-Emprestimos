@@ -1,0 +1,15 @@
+syntax = "proto3";
+package fraude;
+
+service Search {
+  rpc request(SearchRequest) returns (stream SearchResponse){}
+}
+
+message SearchRequest {
+  string cpf = 1;
+  string nome = 2;
+}
+
+message SearchResponse {
+  string status = 1;
+}

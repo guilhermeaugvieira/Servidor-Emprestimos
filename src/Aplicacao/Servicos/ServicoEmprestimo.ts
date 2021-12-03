@@ -3,6 +3,32 @@ import { RepositorioHistoricoEmprestimo } from "../../Dados/Repositorios/Reposit
 import { IServicoEmprestimo } from "../Interfaces/IServicoEmprestimo";
 import { addMonths } from "date-fns";
 import { RepositorioParcela } from "../../Dados/Repositorios/RepositorioParcela";
+import { loadSync } from "@grpc/proto-loader";
+import grpc from "grpc";
+
+const grpcScore = grpc.loadPackageDefinition(
+  loadSync("src/Aplicacao/Protos/score.proto", {
+    keepCase: true,
+    longs: String,
+    enums: String,
+    defaults: true,
+    oneofs: true,
+  })
+);
+
+// @ts-ignore
+let scoreClient = new grpcScore.verificaScore.Greeter(
+  process.env.SCORE_URL,
+  grpc.credentials.createInsecure(),
+  {
+    "grpc.min_reconnect_backoff_ms": 1000,
+    "grpc.max_reconnect_backoff_ms": 10000,
+    "grpc.keepalive_time_ms": 15000,
+    "grpc.keepalive_timeout_ms": 20000,
+    "grpc.keepalive_permit_without_calls": 1,
+    "grpc.http2.max_pings_without_data": 0,
+  }
+);
 
 class ServicoEmprestimo implements IServicoEmprestimo{
 
@@ -10,6 +36,18 @@ class ServicoEmprestimo implements IServicoEmprestimo{
   }
 
   async SolicitarEmprestimo (idUsuario: string, montante: number, numeroPrestacoes: number) : Promise<any> {
+
+    // Verifica score suficiente
+    const scoreResult: number = await new Promise((resolve, reject) => {
+      scoreClient.SearchScore({ cpf: '12312312312', mes: '1' }, (err: any, response: any) => {
+        resolve(parseInt(response.score, 10));
+      });
+    });
+
+    if (scoreResult < 60) {
+      throw new Error("Score não é suficiente para empréstimo");
+    }
+
     const novoEmprestimo = {
       Id_Usuario: idUsuario,
       Data_Solicitacao: new Date(),
